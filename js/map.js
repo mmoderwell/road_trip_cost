@@ -1,6 +1,4 @@
-var dist;
-var time;
-
+var time, dist;
 jQuery(document).ready(function($) {
     //set your google maps parameters
     var latitude = 41.8781,
@@ -196,9 +194,6 @@ jQuery(document).ready(function($) {
             window.alert("No details available for input: '" + place.name + "'");
             return;
         }
-        if (!place.place_id) {
-            return;
-        }
         geocoder.geocode({ 'placeId': place.place_id }, function(results, status) {
             if (status !== 'OK') {
                 window.alert('Geocoder failed due to: ' + status);
@@ -209,7 +204,7 @@ jQuery(document).ready(function($) {
             // Set the position of the marker using the place ID and location.
             marker.setPlace({
                 placeId: place.place_id,
-                location: results[0].geometry.location
+                location: results[0].geometry.location,
             });
         });
     });
@@ -222,25 +217,23 @@ jQuery(document).ready(function($) {
             window.alert("No details available for input: '" + place.name + "'");
             return;
         }
-        if (!place.place_id) {
-            return;
-        }
         geocoder.geocode({ 'placeId': place.place_id }, function(results, status) {
             if (status !== 'OK') {
                 window.alert('Geocoder failed due to: ' + status);
                 return;
             }
-
-            distance();
-            directions();
-
             marker2.setPlace({
                 placeId: place.place_id,
-                location: results[0].geometry.location
+                location: results[0].geometry.location,
             });
+
+            directions();
+            distance();
+
             // Set the position of the marker using the place ID and location.
-            marker2.setVisible(true);
             marker.setVisible(true);
+            marker2.setVisible(true);
+
         });
     });
 
@@ -261,12 +254,13 @@ jQuery(document).ready(function($) {
     }
 
     function distance() {
-        var origin1 = document.getElementById('q2').value;
-        var destinationA = document.getElementById('q3').value;
+        var origin = document.getElementById('q2').value;
+        var destination = document.getElementById('q3').value;
         var service = new google.maps.DistanceMatrixService;
+        var textdist;
         service.getDistanceMatrix({
-            origins: [origin1],
-            destinations: [destinationA],
+            origins: [origin],
+            destinations: [destination],
             travelMode: 'DRIVING',
             unitSystem: google.maps.UnitSystem.IMPERIAL,
             avoidHighways: false,
@@ -289,16 +283,25 @@ jQuery(document).ready(function($) {
             };
             for (var i = 0; i < originList.length; i++) {
                 var results = response.rows[i].elements;
-                geocoder.geocode({ 'address': originList[i] },
-                    showGeocodedAddressOnMap(false));
                 for (var j = 0; j < results.length; j++) {
                     geocoder.geocode({ 'address': destinationList[j] },
                         showGeocodedAddressOnMap(true));
-                    dist = results[j].distance.text;
+                    textdist = results[j].distance.text;
+                    textdist = textdist.replace('mi', '');
+                    textdist = textdist.replace(/,/g, '');
+                    textdist = textdist.replace(' ', '');
+                    dist = textdist;
                     time = results[j].duration.text;
                 }
             }
         });
+    }
+
+    function clearmap() {
+        marker.setVisible(false);
+        marker2.setVisible(false);
+        map.setZoom(map_zoom);
+        map.setCenter(new google.maps.LatLng(latitude, longitude));
     }
 
     //add a custom marker to the map				
