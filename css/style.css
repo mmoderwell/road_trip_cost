@@ -117,7 +117,7 @@ a {
     src: url('../fonts/icomoon/icomoon.eot?#iefix-9heso') format('embedded-opentype'), url('../fonts/icomoon/icomoon.woff?-9heso') format('woff'), url('../fonts/icomoon/icomoon.ttf?-9heso') format('truetype'), url('../fonts/icomoon/icomoon.svg?-9heso#icomoon') format('svg');
 }
 
-.simform {
+.form {
     position: relative;
     margin: 0 auto;
     padding: 2em 0;
@@ -127,14 +127,14 @@ a {
     font-size: 2.5em;
 }
 
-.simform .submit {
+.form .submit {
     display: none;
 }
 
 
 /* Question list style */
 
-.simform ol {
+.form ol {
     margin: 0;
     padding: 0;
     list-style: none;
@@ -143,7 +143,7 @@ a {
     transition: height 0.4s;
 }
 
-.simform ol:before {
+.form ol:before {
     content: '';
     background-color: rgba(0, 0, 0, 0.1);
     position: absolute;
@@ -243,7 +243,7 @@ a {
 }
 
 .questions input:focus,
-.simform button:focus {
+.form button:focus {
     outline: none;
 }
 
@@ -306,7 +306,7 @@ a {
 
 /* Progress bar */
 
-.simform .progress {
+.form .progress {
     width: 0%;
     height: 0.15em;
     background: rgba(0, 0, 0, 0.3);
@@ -314,7 +314,7 @@ a {
     transition: width 0.4s ease-in-out;
 }
 
-.simform .progress::before {
+.form .progress::before {
     position: absolute;
     top: auto;
     width: 100%;
@@ -326,7 +326,7 @@ a {
 
 /* Number indicator */
 
-.simform .number {
+.form .number {
     position: absolute;
     right: 0;
     overflow: hidden;
@@ -336,7 +336,7 @@ a {
     font-size: 0.4em;
 }
 
-.simform .number:after {
+.form .number:after {
     position: absolute;
     left: 50%;
     content: '/';
@@ -345,29 +345,29 @@ a {
     transform: translateX(-50%);
 }
 
-.simform .number span {
+.form .number span {
     float: right;
     width: 40%;
     text-align: center;
 }
 
-.simform .number .number-current {
+.form .number .number-current {
     float: left;
 }
 
-.simform .number-next {
+.form .number-next {
     position: absolute;
     left: 0;
 }
 
-.simform.show-next .number-current {
+.form.show-next .number-current {
     -webkit-transition: -webkit-transform 0.4s;
     transition: transform 0.4s;
     -webkit-transform: translateY(-100%);
     transform: translateY(-100%);
 }
 
-.simform.show-next .number-next {
+.form.show-next .number-next {
     -webkit-animation: moveUpFromDown 0.4s both;
     animation: moveUpFromDown 0.4s both;
 }
@@ -375,8 +375,8 @@ a {
 
 /* Error and final message */
 
-.simform .error-message,
-.simform .final-message {
+.form .error-message,
+.form .final-message {
     position: absolute;
     visibility: hidden;
     opacity: 0;
@@ -384,7 +384,7 @@ a {
     transition: opacity 0.4s;
 }
 
-.simform .error-message {
+.form .error-message {
     padding: 0.4em 3.5em 0 0;
     width: 100%;
     color: rgba(0, 0, 0, 0.7);
@@ -416,7 +416,7 @@ a {
 
 /* Final hiding of form / showing message */
 
-.simform-inner.hide {
+.form-inner.hide {
     visibility: hidden;
     opacity: 0;
     -webkit-transition: opacity 0.3s, visibility 0s 0.3s;
@@ -426,7 +426,7 @@ a {
 
 /* No JS Fallback */
 
-.no-js .simform {
+.no-js .form {
     font-size: 1.75em;
 }
 
@@ -434,7 +434,7 @@ a {
     padding: 0 0 2em;
 }
 
-.no-js .simform .submit {
+.no-js .form .submit {
     display: block;
     float: right;
     padding: 10px 20px;
@@ -443,7 +443,7 @@ a {
     color: rgba(0, 0, 0, 0.4);
 }
 
-.no-js .simform .controls {
+.no-js .form .controls {
     display: none;
 }
 
@@ -458,13 +458,17 @@ input[type=text]::-ms-clear {
 /* Adjust form for smaller screens */
 
 @media screen and (max-width: 44.75em) {
-    .simform {
+    .form {
         font-size: 1.8em;
+    }
+    .next::after {
+        top: 24px;
+        font-size: 1.4em;
     }
 }
 
 @media screen and (max-width: 33.5625em) {
-    .simform {
+    .form {
         font-size: 1.2em;
     }
 }
