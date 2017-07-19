@@ -2,6 +2,7 @@ var form = document.getElementById('theForm');
 
 new stepsForm(theForm, {
     onSubmit: function() {
+        //a promise that waits for distance to be done before it displays the data
         distance().then((d) => {
             dist = d;
             stats();
@@ -30,7 +31,9 @@ function stats() {
     let cost = Math.round((dist / mpg) * gas);
 
     // hide form
-    classie.addClass(form.querySelector('.form-inner'), 'hide');
+    //classie.addClass(form.querySelector('.form-inner'), 'hide');
+    form.querySelector('.form-inner').classList.add('hide');
+
 
     var messageEl = form.querySelector('.final-message');
     if (cost == 0) {
@@ -38,5 +41,7 @@ function stats() {
     } else {
         messageEl.innerHTML = `This trip will cost you about ${cost} dollars.`;
     }
-    classie.addClass(messageEl, 'show');
+    //classie.addClass(messageEl, 'show');
+    messageEl.classList.add('show');
+    form.querySelector('.again').classList.add('show');
 }

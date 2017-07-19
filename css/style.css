@@ -110,14 +110,6 @@ a {
     }
 }
 
-@font-face {
-    font-weight: normal;
-    font-style: normal;
-    font-family: 'icomoon';
-    src: url('../fonts/icomoon/icomoon.eot?-9heso');
-    src: url('../fonts/icomoon/icomoon.eot?#iefix-9heso') format('embedded-opentype'), url('../fonts/icomoon/icomoon.woff?-9heso') format('woff'), url('../fonts/icomoon/icomoon.ttf?-9heso') format('truetype'), url('../fonts/icomoon/icomoon.svg?-9heso#icomoon') format('svg');
-}
-
 .form {
     position: relative;
     margin: 0 auto;
@@ -147,7 +139,6 @@ a {
 
 .form ol:before {
     content: '';
-    background-color: rgba(0, 0, 0, 0.1);
     position: absolute;
     left: 0;
     bottom: 0;
@@ -231,12 +222,12 @@ a {
 .questions input {
     display: block;
     margin: 0.3em 0 0 0;
-    padding: 0.5em 1em 0.5em 0.7em;
+    padding: 0.5em 1em 0.5em 0em;
     width: calc(100% - 2em);
     border: none;
     background: transparent;
     color: rgba(0, 0, 0, 0.8);
-    font-size: 1em;
+    font-size: .75em;
     line-height: 1;
     opacity: 0;
     -webkit-transition: opacity 0.3s;
@@ -377,7 +368,8 @@ a {
 /* Error and final message */
 
 .form .error-message,
-.form .final-message {
+.form .final-message,
+.form .again {
     position: absolute;
     visibility: hidden;
     opacity: 0;
@@ -413,6 +405,30 @@ a {
     -webkit-transition-delay: 0.5s;
     transition-delay: 0.5s;
 }
+
+.again {
+    top: 50%;
+    left: 0;
+    padding: 0.5em;
+    width: 100%;
+    text-align: center;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.again.show {
+    visibility: visible;
+    opacity: 1;
+    width: 30%;
+    margin-top: 8em;
+    margin-left: 35%;
+    margin-right: 35%;
+    text-align: center;
+    line-height: normal;
+    -webkit-transition-delay: 0.5s;
+    transition-delay: 0.5s;
+}
+
 
 
 

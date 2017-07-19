@@ -53,7 +53,7 @@
         // total questions
         this.questionsCount = this.questions.length;
         // show first question
-        classie.addClass(this.questions[0], 'current');
+        this.questions[0].classList.add('current');
         // next question control
         this.ctrlNext = this.el.querySelector('button.next');
         // progress bar
@@ -80,7 +80,7 @@
             // focus
             onFocusStartFn = function() {
                 firstElInput.removeEventListener('focus', onFocusStartFn);
-                classie.addClass(self.ctrlNext, 'show');
+                self.ctrlNext.classList.add('show');
             };
 
         // show the next question control first time the input gets focused
@@ -139,13 +139,13 @@
             this._updateQuestionNumber();
 
             // add class "show-next" to form element (start animations)
-            classie.addClass(this.el, 'show-next');
+            this.el.classList.add('show-next');
 
             // remove class "current" from current question and add it to the next one
             // current question
             var nextQuestion = this.questions[this.current];
-            classie.removeClass(currentQuestion, 'current');
-            classie.addClass(nextQuestion, 'current');
+            currentQuestion.classList.remove('current');
+            nextQuestion.classList.add('current');
         }
 
         // after animation ends, remove class "show-next" from form element and change current question placeholder
@@ -157,7 +157,7 @@
                 if (self.isFilled) {
                     self._submit();
                 } else {
-                    classie.removeClass(self.el, 'show-next');
+                    self.el.classList.remove('show-next');
                     self.currentNum.innerHTML = self.nextQuestionNum.innerHTML;
                     self.questionStatus.removeChild(self.nextQuestionNum);
                     // force the focus on the next input
@@ -218,12 +218,12 @@
                 // ...
         };
         this.error.innerHTML = message;
-        classie.addClass(this.error, 'show');
+        this.error.classList.add('show');
     }
 
     // clears/hides the current error message
     stepsForm.prototype._clearError = function() {
-        classie.removeClass(this.error, 'show');
+        this.error.classList.remove('show');
     }
 
     // add to global namespace
