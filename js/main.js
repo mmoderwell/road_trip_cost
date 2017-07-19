@@ -1,10 +1,11 @@
-var theForm = document.getElementById('theForm');
-var done = false;
+var form = document.getElementById('theForm');
+
 new stepsForm(theForm, {
     onSubmit: function() {
-        done = setInterval(function() {
+        distance().then((d) => {
+            dist = d;
             stats();
-        }, 100);
+        });
     }
 });
 
@@ -15,25 +16,27 @@ function clear() {
     let cost = 0;
 
     // show form
-    classie.addClass(theForm.querySelector('.simform-inner'), 'show');
+    classie.addClass(form.querySelector('.form-inner'), 'show');
 
-    var messageEl = theForm.querySelector('.final-message');
+    var messageEl = form.querySelector('.final-message');
     messageEl.innerHTML = ``;
     classie.addClass(messageEl, 'hide');
 }
 
 function stats() {
-    if (dist) {
-        const gas = 2.324;
-        let mpg = document.getElementById("q1").value;
-        let cost = Math.round((dist / mpg) * gas);
 
-        // hide form
-        classie.addClass(theForm.querySelector('.simform-inner'), 'hide');
+    const gas = 2.324;
+    let mpg = document.getElementById("q1").value;
+    let cost = Math.round((dist / mpg) * gas);
 
-        var messageEl = theForm.querySelector('.final-message');
+    // hide form
+    classie.addClass(form.querySelector('.form-inner'), 'hide');
+
+    var messageEl = form.querySelector('.final-message');
+    if (cost == 0) {
+        messageEl.innerHTML = `This trip will cost you less than a dollar.`;
+    } else {
         messageEl.innerHTML = `This trip will cost you about ${cost} dollars.`;
-        classie.addClass(messageEl, 'show');
-        clearTimeout(done);
     }
+    classie.addClass(messageEl, 'show');
 }
