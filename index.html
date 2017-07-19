@@ -18,6 +18,22 @@
     <!--Google Fonts-->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,300" rel="stylesheet">
     <script src="js/modernizr.custom.js"></script>
+    <script>
+    (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-101729152-3', 'auto');
+    ga('send', 'pageview');
+    </script>
 </head>
 
 <body>
@@ -28,7 +44,7 @@
                     <ol class="questions">
                         <li>
                             <span><label for="q1">How many miles per gallon does your car get?</label></span>
-                            <input id="q1" name="q1" type="number" min="1" placeholder="Enter a number"/>
+                            <input id="q1" name="q1" type="number" min="1" placeholder="Enter a number" />
                         </li>
                         <li>
                             <span><label for="q2">Where are you leaving from?</label></span>
