@@ -1,5 +1,5 @@
-var time, dist;
-var distance;
+let time, dist;
+let distance;
 
 document.addEventListener("DOMContentLoaded", function(event) {
     //set your google maps parameters
@@ -182,14 +182,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
     //inizialize the map
     var map = new google.maps.Map(document.getElementById('google-container'), map_options);
     var geocoder = new google.maps.Geocoder;
-    var input1 = document.getElementById('q2');
-    var input2 = document.getElementById('q3');
-    var autocomplete = new google.maps.places.Autocomplete(input1);
-    var autocomplete2 = new google.maps.places.Autocomplete(input2);
+    var start = document.getElementById('q2');
+    var end = document.getElementById('q3');
+    var start_autocomplete = new google.maps.places.Autocomplete(start);
+    var end_autocomplete = new google.maps.places.Autocomplete(end);
 
-    autocomplete.addListener('place_changed', function() {
+    start_autocomplete.addListener('place_changed', function() {
 
-        var place = autocomplete.getPlace();
+        var place = start_autocomplete.getPlace();
         if (!place.geometry) {
             // User entered the name of a Place that was not suggested and
             // pressed the Enter key, or the Place Details request failed.
@@ -204,15 +204,15 @@ document.addEventListener("DOMContentLoaded", function(event) {
             map.setZoom(11);
             map.setCenter(results[0].geometry.location);
             // Set the position of the marker using the place ID and location.
-            marker.setPlace({
+            start_marker.setPlace({
                 placeId: place.place_id,
                 location: results[0].geometry.location,
             });
         });
     });
 
-    autocomplete2.addListener('place_changed', function() {
-        var place = autocomplete2.getPlace();
+    end_autocomplete.addListener('place_changed', function() {
+        var place = end_autocomplete.getPlace();
         if (!place.geometry) {
             // User entered the name of a Place that was not suggested and
             // pressed the Enter key, or the Place Details request failed.
@@ -224,16 +224,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 window.alert('Geocoder failed due to: ' + status);
                 return;
             }
-            marker2.setPlace({
+            end_marker.setPlace({
                 placeId: place.place_id,
                 location: results[0].geometry.location,
             });
 
+            //draw a line between start and end
             directions();
 
             // Set the position of the marker using the place ID and location.
-            marker.setVisible(true);
-            marker2.setVisible(true);
+            start_marker.setVisible(true);
+            end_marker.setVisible(true);
 
         });
     });
@@ -256,6 +257,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     distance = function() {
         return new Promise(function(resolve, reject) {
+            //async code in promise
             var origin = document.getElementById('q2').value;
             var destination = document.getElementById('q3').value;
             var service = new google.maps.DistanceMatrixService;
@@ -288,7 +290,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     for (var j = 0; j < results.length; j++) {
                         geocoder.geocode({ 'address': destinationList[j] },
                             showGeocodedAddressOnMap(true));
+
                         textdist = results[j].distance.text;
+                        //take string with distance data and unit and convert to raw number
                         textdist = textdist.replace('mi', '');
                         textdist = textdist.replace(/,/g, '');
                         textdist = textdist.replace(' ', '');
@@ -308,18 +312,18 @@ document.addEventListener("DOMContentLoaded", function(event) {
     };
 
     function clearmap() {
-        marker.setVisible(false);
-        marker2.setVisible(false);
+        start_marker.setVisible(false);
+        end_marker.setVisible(false);
         map.setZoom(map_zoom);
         map.setCenter(new google.maps.LatLng(latitude, longitude));
     }
 
     //add a custom marker to the map                
-    var marker = new google.maps.Marker({
+    var start_marker = new google.maps.Marker({
         map: map,
         icon: 'images/icon-location.png'
     });
-    var marker2 = new google.maps.Marker({
+    var end_marker = new google.maps.Marker({
         map: map,
         icon: 'images/icon-location.png'
     });

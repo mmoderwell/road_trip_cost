@@ -10,20 +10,6 @@ new stepsForm(theForm, {
     }
 });
 
-function clear() {
-
-    const gas = 2.324;
-    let mpg = 0;
-    let cost = 0;
-
-    // show form
-    classie.addClass(form.querySelector('.form-inner'), 'show');
-
-    var messageEl = form.querySelector('.final-message');
-    messageEl.innerHTML = ``;
-    classie.addClass(messageEl, 'hide');
-}
-
 function stats() {
 
     const gas = 2.324;
@@ -31,17 +17,18 @@ function stats() {
     let cost = Math.round((dist / mpg) * gas);
 
     // hide form
-    //classie.addClass(form.querySelector('.form-inner'), 'hide');
     form.querySelector('.form-inner').classList.add('hide');
 
 
-    var messageEl = form.querySelector('.final-message');
+    var final_message = form.querySelector('.final-message');
     if (cost == 0) {
-        messageEl.innerHTML = `This trip will cost you less than a dollar.`;
+        final_message.innerHTML = `This trip will cost you less than a dollar.`;
+    } else if (cost == 1) {
+        final_message.innerHTML = `This trip will cost you about a dollar.`;
     } else {
-        messageEl.innerHTML = `This trip will cost you about ${cost} dollars.`;
+        final_message.innerHTML = `This trip will cost you about ${cost} dollars.`;
     }
-    //classie.addClass(messageEl, 'show');
-    messageEl.classList.add('show');
+
+    final_message.classList.add('show');
     form.querySelector('.again').classList.add('show');
 }

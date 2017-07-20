@@ -45,6 +45,8 @@ a {
 
 
 
+
+
 /*----------------------------- Map Element --------------------------------*/
 
 #google-container {
@@ -128,6 +130,8 @@ a {
 
 
 
+
+
 /* Question list style */
 
 .form ol {
@@ -164,6 +168,8 @@ a {
     -webkit-transition: none;
     transition: none;
 }
+
+
 
 
 
@@ -221,6 +227,8 @@ a {
 
 
 
+
+
 /* Input field */
 
 .questions input {
@@ -238,8 +246,7 @@ a {
     transition: opacity 0.3s;
 }
 
-.questions .current input,
-.no-js .questions input {
+.questions .current input {
     opacity: 1;
 }
 
@@ -247,6 +254,8 @@ a {
 .form button:focus {
     outline: none;
 }
+
+
 
 
 
@@ -300,6 +309,8 @@ a {
 
 
 
+
+
 /* Progress bar */
 
 .form .progress {
@@ -318,6 +329,8 @@ a {
     background: rgba(0, 0, 0, 0.05);
     content: '';
 }
+
+
 
 
 
@@ -372,7 +385,6 @@ a {
 
 
 
-
 /* Error and final message */
 
 .form .error-message,
@@ -414,6 +426,9 @@ a {
     transition-delay: 0.5s;
 }
 
+
+/* New trip button */
+
 .again {
     top: 50%;
     left: 0;
@@ -439,8 +454,6 @@ a {
 
 
 
-
-
 /* Final hiding of form / showing message */
 
 .form-inner.hide {
@@ -451,11 +464,15 @@ a {
 }
 
 
+
+
 /* Remove IE clear cross */
 
 input[type=text]::-ms-clear {
     display: none;
 }
+
+
 
 
 
