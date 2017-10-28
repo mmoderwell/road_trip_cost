@@ -19,7 +19,6 @@ function stats() {
     // hide form
     form.querySelector('.form-inner').classList.add('hide');
 
-
     var final_message = form.querySelector('.final-message');
     if (cost == 0) {
         final_message.innerHTML = `This trip will cost you less than a dollar.`;
